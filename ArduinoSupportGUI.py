@@ -1,10 +1,11 @@
-#path='C:/Users/asaas/desktop/KASS.ino'r
+path='C:/Users/asaas/desktop/KASS.ino'
 
 from ssl import OP_CIPHER_SERVER_PREFERENCE
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import time
+from winreg import KEY_ALL_ACCESS
 
 hedprg=[]
 setprg=['void setup(){']
@@ -21,7 +22,7 @@ hl=["HIGH","LOW","PWM"]
 
 dsfrag=0
 casefrag=0
-kass=0
+bb=0
 mado=0
 counter=0
 paramnum=1
@@ -70,12 +71,12 @@ def startbuttonsetalert(event):
     startbuttonsetalertbutton.pack()
 
 def motortimewindow():
-    global kass
+    global bb
     
     def getnum(event):
-        global kass
+        global bb
         global mado
-        kass=motorkazu.get()
+        bb=motorkazu.get()
         mado=outputsetteientry.get()
 
     motortimewin=tk.Toplevel()
@@ -139,7 +140,7 @@ def motorparamwin(event):
         pininput.pack()
         entrys_b.append(pininput)
 
-    for timeinput in range(int(kass)):
+    for timeinput in range(int(bb)):
         timelabel=tk.Label(kariframe,text="パラメータ"+str(paramnum))
         timelabel.pack()
         timeinput=tk.Entry(kariframe,width=10)
@@ -154,9 +155,9 @@ def motorparamwin(event):
 
 def iobutton():
     def getparam(event):
-        global kass
+        global bb
         global mado
-        kass=iobuttonentry.get()
+        bb=iobuttonentry.get()
         mado=iobuttonoutputentry.get()
 
     iobuttonget=tk.Toplevel()
@@ -183,7 +184,7 @@ def iobutton():
     iosetbutton.pack()
 
 def ioset(event):
-    global kass
+    global bb
     global mado
 
     def getparam(event):
@@ -191,7 +192,7 @@ def ioset(event):
         hlstak=[]
         global counter
 
-        for kari in range(int(kass)):
+        for kari in range(int(bb)):
             for i in range(int(mado)):
                 outputstak.append(entrys_b[counter].get())
                 hlstak.append(combos[counter].get())
@@ -234,7 +235,7 @@ def ioset(event):
     del entrys_b[:]
     del entrys_c[:]
 
-    for buttoninput in range(int(kass)):
+    for buttoninput in range(int(bb)):
         buttonsetlabel=ttk.Label(iosetupframe,text="ボタンのピンは?")
         buttonsetlabel.pack()
         buttonsetentry=ttk.Entry(iosetupframe,width=10)
@@ -272,13 +273,13 @@ def ioset(event):
     finishbutton.pack()
 
 def lchikasta():
-    global kass
+    global bb
     global mado
 
     def ledcount(evemt):
-        global kass
+        global bb
         global mado
-        kass=lchikastaentry.get()
+        bb=lchikastaentry.get()
 
     lchikastatopwin=tk.Toplevel()
     lchikastatopwin.geometry("200x100")
@@ -312,7 +313,7 @@ def lchikamain(event):
         
         loopprg.append("delay("+delaytime+");}")
 
-    global kass
+    global bb
 
     lchikamainwin=tk.Toplevel()
     lchikamainwin.geometry("200x300")
@@ -321,7 +322,7 @@ def lchikamain(event):
     lchikamainframe=tk.Frame(lchikamainwin,width=200)
     lchikamainframe.pack()
 
-    for lchikaparam in range(int(kass)):
+    for lchikaparam in range(int(bb)):
         setlabel=tk.Label(lchikamainframe,text="LED"+str(lchikaparam+1)+"のピンは?")
         setlabel.pack()
         ledsetentry=tk.Entry(lchikamainframe,width=10)
@@ -341,12 +342,14 @@ def lchikamain(event):
 
 
 def printf(event):
-    global kass
+    global bb
     global casefrag
     global counter
 
-    kass=0
+    bb=0
     counter=0
+
+    code=open(path,'w')
 
     if casefrag!=0:
         del loopprg[-1]
@@ -365,14 +368,17 @@ def printf(event):
 
     for hed in hedprg:
         print(hed)
+        code.write(hed+'\n')
 
     for set in setprg:
         print(set)
+        code.write(set+'\n')
 
     print()
 
     for alloutput in loopprg:
         print(alloutput)
+        code.write(alloutput+'\n')
 
     del inpin[:]
     del outpin[:]

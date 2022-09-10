@@ -5,7 +5,7 @@ setprg=['void setup(){','Serial.begin(9600);']
 loopprg=['void loop(){']
 paramlist=[]
 outpinlist=[]
-KASS=0
+BB=0
 iffrag=0
 elsefrag=0
 elseiffrag=0
@@ -28,7 +28,7 @@ def setset(setmode):
     if setmode=='01':
         print('ピンI/O設定')
 
-        while KASS<401:
+        while BB<401:
             print('どのピンを設定しますか?')
             setpin=input()
 
@@ -49,7 +49,7 @@ def setset(setmode):
     if setmode=='03':
         print('サーボセットアップ')
 
-        while KASS<401:
+        while BB<401:
             print('サーボの名前は?')
             setservoname=input()
 
@@ -64,7 +64,7 @@ def setset(setmode):
 def loopset(loopmode):
     if loopmode=='01':
         print('HIGH設定モード')
-        while KASS<401:
+        while BB<401:
             print('どのピン?')
             ledpin=input()
             if ledpin=='99':
@@ -77,7 +77,7 @@ def loopset(loopmode):
     if loopmode=='02':
         print('Lチカモード')
 
-        while KASS<401:
+        while BB<401:
             print('どのピンのLED?')
             lchikapin=input()
 
@@ -97,7 +97,7 @@ def loopset(loopmode):
     if loopmode=='03':
         print('サーボ角度指定')
                 
-        while KASS<401:
+        while BB<401:
             print('どのサーボ?')
             loopservoname=input()
                     
@@ -169,7 +169,7 @@ def loopset(loopmode):
         casecount=int(input())
         for caseprg in range(casecount):
             loopprg.append('case '+str(caseprg)+':')
-            while KASS<999:
+            while BB<999:
                 print('次のcaseを入力するには99を押してね!')
                 print('case '+str(caseprg)+'のプログラムは?')
                 caseprgset=input()
@@ -264,7 +264,7 @@ def preset(presetmode):
         for changesyori in btpinlist:
             loopprg.append('case '+str(counter)+':')
 
-            while KASS<401:
+            while BB<401:
                 print('次に進めたいときは99を押してね!')
                 print(changesyori+'ピンのボタンを押したときの処理は?')
                 loopmode=input()
@@ -285,7 +285,7 @@ def preset(presetmode):
         loopprg.append('break;')
         loopprg.append('}')
 
-while KASS<401:
+while BB<401:
     for hedhed in hed:
         print(hedhed)
 
@@ -304,7 +304,7 @@ while KASS<401:
 
     if mode=='00':
         print('ヘッダーとか')
-        while KASS<401:
+        while BB<401:
             print('ヘッダーに何を入れる?')
             hedtype=input()
 
@@ -316,7 +316,7 @@ while KASS<401:
     if mode=='01':
         print('setup内プログラム')
 
-        while KASS<401:
+        while BB<401:
             print('何を設定する?')
             setmode=input()
 
@@ -329,7 +329,7 @@ while KASS<401:
 
         print('loop内プログラム')
 
-        while KASS<401:
+        while BB<401:
 
             print(str(iffrag)+str(elsefrag)+str(elseiffrag))
 
