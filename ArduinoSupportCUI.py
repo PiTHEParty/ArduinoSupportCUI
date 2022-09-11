@@ -1,4 +1,4 @@
-#path='C:/Users/asaas/desktop/KASS.ino'r
+#path='Please write Path'
 
 hed=['#include<Servo.h>']
 setprg=['void setup(){','Serial.begin(9600);']
@@ -113,8 +113,10 @@ def loopset(loopmode):
         print('delay単発')
         print('delay時間は?')
         delaytime=input()
-
-        loopprg.append('delay('+delaytime+');')
+        if delaytime.isdecimal:
+            loopprg.append('delay('+delaytime+');')
+        else:
+            print("input error!")
 
     if loopmode=='05':
         print('if文アタマ')
